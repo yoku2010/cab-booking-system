@@ -25,4 +25,4 @@ Cab Management System
  - Login
  - Manage users (add/update/delete)
 
-> Note: This System is developed using django1.7 + sqlite3
+> Note: This system is developed using django1.7 + sqlite3.
