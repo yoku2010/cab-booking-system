@@ -305,6 +305,7 @@ input[type=password] {
     0 1px 0 rgba(255,255,255,0.1);
   border-radius:0.3em;
   margin-bottom:20px;
+  color: #EEE;
 }
 
 label[for=remember]{
@@ -363,6 +364,7 @@ input[type=password]:hover,
 label:hover ~ input[type=text],
 label:hover ~ input[type=password] {
   background:#27292c;
+  color: #FAFAFA;
 }
 div.icon {
   display: block;
@@ -381,7 +383,7 @@ div span.login{
   background: linear-gradient(#1f2124, #27292c);
   box-shadow:
     0 1px 0 rgba(255,255,255,0.1);
-  padding: 7px 10px;
+  padding: 8px 10px 7px;
   border-radius: 0.3em 0 0 0.3em;
   border-right: 1px solid #19191a;
   margin: 2px 0px 0px 1px;
@@ -566,7 +568,7 @@ display: none;
    border-right: 1px solid #FFFFFF !important;
 }
 footer {
-  margin-top: 30px;
+  margin-top: 32px;
   display: block;
   background: #222;
   color: #FAFAFA;
@@ -621,6 +623,7 @@ ol {
 .pp {
   margin-top: 15px;
 }
+input:focus, textarea:focus, select:focus {outline:0 none;}
 @font-face {
   font-family: 'Droid Sans',"Helvetica Neue","Helvetica",Helvetica,Arial,sans-serif;
   font-style: normal;
