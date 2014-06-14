@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+<div class="wraper-body">
+<div class="unleash_bg">
+ <div id="unleash_slider" style="width: 934px; height: 350px;">
+  <div class="box featured" style="height: 350px; left: 0px;"><img src="{% static "img/unleash/img1.png" %}"><div class="caption" style="width: 633px; bottom: 0px; opacity: 0.8;"><a href="#"><h1>HCL offering service here.</h1></a><o>To facilitate better transport services for the employees so that they can work more efficiently and effectively concentrating on their core job and not taking any hassles for transportation!</p></div></div>
+  <div class="box" style="height: 350px; left: 683px;"><img src="{% static "img/unleash/img2.png" %}"><div class="caption" style="width: 633px; bottom: 0px; opacity: 0;"><a href="#"><h1>Outstation Taxi</h1></a><p>To be able to facilitate better transport services outstation instead of limiting their services to their local area alone, thus increase their return on investment (ROI)!</p></div></div>
+  <div class="box" style="height: 350px; left: 745.75px;"><img src="{% static "img/unleash/img3.png" %}"><div class="caption" style="width: 633px; bottom: 0px; opacity: 0;"><a href="#"><h1>Eco-friendly and Airport Transfer</h1></a><p> Travels addresses all the concerns of today's discerning traveler! We offer Safety, good time keeping, courtesy, and are environment friendly too!</p></div></div>
+  <div class="box" style="height: 350px; left: 808.5px;"><img src="{% static "img/unleash/img4.png" %}"><div class="caption" style="width: 633px; bottom: 0px; opacity: 0;"><a href="#"><h1>Group Bookings and Local Transfer</h1></a><p>Allows the customer to book space for a group in the case of weddings or corporate meetings (Event management)!</p></div></div>
+  <div class="box" style="height: 350px; left: 871.25px;"><img src="{% static "img/unleash/img5.png" %}"><div class="caption" style="width: 633px; bottom: 0px; opacity: 0;"><a href="#"><h1>Online Cab Reservation.</h1></a><p>A tools through which customers can reserve available cabs online prior to their expected pick-up date or time. The software acts as an office that is open 24/7!</p></div></div>
+ </div>
+</div>
+</div>
+{% endblock %}
+{% block js %}
+<script src="{% static "js/libs/jquery-css-transform.js" %}"></script>
+<script src="{% static "js/libs/jquery-animate-css-rotate-scale.js" %}"></script>
+<script src="{% static "js/libs/jquery.unleash.min.js" %}"></script>
+<script src="{% static "js/libs/jquery.faq.js" %}"></script>  
+<script src="{% static "js/libs/jquery.blackandwhite.min.js" %}"></script>
+<script src="{% static "js/libs/js_func.js" %}"></script>
+<script src="{% static "js/services.js" %}"></script>
+{% endblock %}

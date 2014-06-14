@@ -7,6 +7,7 @@ https://docs.djangoproject.com/en/dev/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/dev/ref/settings/
 """
+from django.conf import global_settings
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
@@ -36,6 +37,9 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'apps.employee',
+    'apps.manager',
+    'apps.frontend',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -81,3 +85,32 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/dev/howto/static-files/
 
 STATIC_URL = '/static/'
+
+TEMPLATE_DIRS = (
+    os.path.join(BASE_DIR, 'templates').replace('\\', '/'),
+    )
+
+TEMPLATE_LOADERS = (
+    'django.template.loaders.filesystem.Loader',
+    'django.template.loaders.app_directories.Loader',
+)
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static').replace('\\', '/'),
+)
+
+TEMPLATE_CONTEXT_PROCESSORS = global_settings.TEMPLATE_CONTEXT_PROCESSORS + (
+    "django.core.context_processors.request",
+)
+
+# Email settings
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TLS = False
+EMAIL_HOST = 'smtp.domain.com'
+EMAIL_PORT = 25
+EMAIL_HOST_USER = 'info@doamin.com'
+EMAIL_HOST_PASSWORD = 'password'
+
+# login/logout urls
+LOGIN_URL="/login/"
+LOGOUT_URL="/user-logout/"

@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static "css/responsive.css" %}"> 
+<link rel="stylesheet" type="text/css" href="{% static "css/jquery.onebyone.css" %}">
+{% endblock %}
+{% block body %}
+<div class="wraper-body">
+    <div class="fallback"></div>
+    <div class="oneByOne1" style="overflow: hidden;"><div id="obo_slider" style="left: 0px;">         
+    <div class="oneByOne_item" style="display: block; left: 0px;">
+      <img src="{% static "img/home_page_7/home7_slide_1.png" %}" class="wp1_3 wp1_left animate0 rollIn" alt="" style="display: block;">                  
+      <span class="txt1 txt_right animate1 rollIn" style="display: block;">HCL Infosystems Ltd. (Corporate Office)</span>     
+      <span class="txt2 txt_right animate2 rollIn" style="display: block;">Corporate Office</span>                      
+      <span class="txt3 txt_right animate3 rollIn" style="display: block;"> <span class='icon_i'><i class='fa fa-home fa-2x'></i></span> E-4,5 &amp; 6, Sector 11,NOIDA 201 301,UP India Tel : <span class='icon_i'><i class='fa fa-phone fa fw'></i></span> +91 120 2526518/19, 2520977 Fax : <span class='icon_i'><i class='fa fa-fax fa fw'></i></span> 2550923 Prefix from Delhi: 0120</span>
+    </div>
+    <div class="oneByOne_item" style="display: none; left: 960px;">                                   
+      <img src="{% static "img/home_page_7/home7_slide_2.png" %}" class="wp1_3 wp1_left animate0" alt="" style="display: none;">                  
+      <span class="txt1 blue txt_right2 animate1" style="display: none;">Corporate Office</span>      
+      <span class="txt2 blue txt_right2 animate2" style="display: none;">HCL Care</span>                        
+      <span class="txt2 blue txt_right2 animate3" style="display: none;">HCL Services Limited</span>                       
+    </div>  
+    
+    <div class="oneByOne_item" style="display: none; left: 1920px;">
+      <img src="{% static "img/home_page_7/home7_slide_3.png" %}" class="wp1_3 animate0" alt="" style="display: none;">                 
+      <span class="txt1 animate1" style="display: none;">Contact Information :1860 180 3333</span>      
+      <span class="txt2 animate2" style="display: none;">SMS your query to : +91 9911115555</span>                       
+      <span class="txt3 animate3" style="display: none;">For Service Requests : <span class='icon_i'><i class='fa fa-envelope fa fw'></i></span>
+<a href="hcltouch@hcl.com">hcltouch@hcl.com</a></span>                        
+    </div>                                                                                              
+
+    <div class="oneByOne_item" style="display: none; left: 2880px;">                                  
+      <img src="{% static "img/home_page_7/home7_slide_4.png" %}" class="wp1_3 animate0" alt="" style="display: none;">             
+      <span class="txt1 blue animate1" style="display: none;">HCL Infosystems Head Office </span>      
+      <span class="txt2 blue animate2" style="display: none;">HCL Customer Care</span>                       
+      <span class="txt3 short animate3" style="display: none;"><span class='icon_i'><i class='fa fa-phone-square fa-2x'></i></span> Phone: 1860-1800-425 Phone: 0120-2406105
+        Reach the above numbers for enquiries on HCL products, complaints or for questions on its services across India.</span>
+    </div>
+</div>
+</div>
+</div>
+{% endblock %}
+{% block js %}
+<script src="{% static "js/libs/jquery.bxSlider.min.js" %}"></script>
+<script src="{% static "js/libs/jquery.onebyone.min.js" %}"></script>              
+<script src="{% static "js/libs/jquery.touchwipe.min.js" %}"></script> 
+<script src="{% static "js/libs/jquery.blackandwhite.min.js" %}"></script>
+<script src="{% static "js/libs/js_func.js" %}"></script>
+<script src="{% static "js/contacts.js" %}"></script>
+{% endblock %}

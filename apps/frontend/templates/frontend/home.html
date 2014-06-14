@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+<div class="wraper-body">
+    <img class='slider' id='img_slider'/>
+    <form>
+      <h1>Employer Login</h1>
+      <div class="inset">
+          <p>
+            <label for="email">EMPLOYER ID</label>
+            <div class='icon'>
+               <span class='icon_i login'><i class='fa fa-envelope-o fa fw'></i></span>
+             <input type="text" name="email" placeholder="Enter your hcl id">
+             
+            </div>
+          </p>
+          <p>
+            <label for="password">PASSWORD</label>
+            <div class='icon'>
+              <span class='icon_i login'><i class='fa fa-key fa fw'></i></span>
+             <input type="password" name="password" placeholder="Enter your password">
+            </div>
+          </p>
+          <p>
+            <input type="checkbox" name="remember" id="remember">
+            <label for="remember">Remember me</label>
+          </p>
+      </div>
+      <p class="p-container">
+          <span>Forgot password ?</span>
+          <input type="submit" name="go" id="go" value="Log in">
+      </p>
+  </form>
+</div>
+{% endblock %}
+{% block js %}
+<script type="text/javascript" src="{% static "js/home.js" %}"></script>
+{% endblock %}
