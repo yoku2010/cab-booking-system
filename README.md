@@ -22,6 +22,7 @@ Cab Management System
  - Approve / Reject cabs
     
 ###Admin
+ - Login
  - Manage users (add/update/delete)
 
 > Note: This System is developed using django1.7 + sqlite3
