@@ -12,13 +12,16 @@
   <body>
     <div class="wraper">
        <header class="header">
-          <a class="logo" href="index.html"></a>
+          <a class="logo" href="{% url "home" %}"></a>
           <nav>
               <ul>
                <li><a href="{% url "home" %}" class="{% if "home" == menu %}active{% endif %}">Home</a></li>
                <li><a href="{% url "about-us" %}" class="{% if "about-us" == menu %}active{% endif %}">About Us</a></li>
                <li><a href="{% url "services" %}" class="{% if "services" == menu %}active{% endif %}">Services</a>
                <li><a href="{% url "contacts" %}" class="{% if "contacts" == menu %}active{% endif %}">Contacts</a>
+               {% if user.is_authenticated %}
+               <li><a href="{% url "user-logout" %}">Logout</a>
+               {% endif %}
              </ul>
           </nav>
       </header>
@@ -40,14 +43,18 @@
       {% block body %}
       {% endblock %}
     </div>
-    <footer>
-      <span>&copy; HCL Technology 2014</span>
-      <div class="links">
+    <!-- copyright -->
+    <div class="copyright">
+     <div class="wraper">
+      <p>
+        <span>&copy; Copyright 2014 HCL Technology</span>All Rights Reserved
         <a href="{% url "privacy-policy" %}">Privacy Policy</a>
-        <a class="no-link" href="#">|</a>
-        <a href="{% url "terms-and-conditions" %}">Terms And Conditions</a>
-      </div>
-    </footer>
+        <a href="{% url "terms-and-conditions" %}">Terms and Conditions</a>
+      </p>
+      <a class="top" href="#">Back to the top</a>
+     </div>
+    </div>
+    <!-- /copyright -->
   </body>
   <script type="text/javascript" src="{% static "js/libs/jquery.min.js" %}"></script>
   {% block js %}

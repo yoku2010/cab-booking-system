@@ -1,26 +1,87 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block body %}
+{% if user.is_authenticated %}
+<div class="wraper-body">
+  <div class="share_story">
+   <h4>Welcome! {% if user.first_name %}{{ user.first_name }}{% else %}{{ user.username }}{% endif %}</h4>
+   {% if "employee" == group %}
+   <ul class="user-link">
+    <li>
+      <a class="btn_col" href="#" id="book_cab">Book A Cab</a>
+    </li>
+    <li>
+      <a class="btn_col" href="#" id="view_cab">View Booked Cabs</a>
+    </li>
+   </ul>
+   {% elif "employee_manager" == group %}
+   <ul class="user-link">
+    <li>
+      <a class="btn_col" href="#" id="book_cab">Book A Cab</a>
+    </li>
+    <li>
+      <a class="btn_col" href="#" id="view_cab">View Booked Cabs</a>
+    </li>
+    <li>
+      <a class="btn_col" href="#" id="approve_cab">Approve Cabs</a>
+    </li>
+   </ul>
+   {% elif "manager" == group %}
+   <ul class="user-link">
+    <li>
+      <a class="btn_col" href="#" id="approve_cab">Approve Cabs</a>
+    </li>
+   </ul>
+   {% elif "admin" == group %}
+   <ul class="user-link">
+    <li>
+      <a class="btn_col" id="view_users" href="#">Users</a>
+    </li>
+    <li>
+      <a class="btn_col" id="add_user" href="#">Add User</a>
+    </li>
+   </ul>
+   {% endif %}
+  </div>
+  <div class="play-ground">
+    <h4 class="bord" id="header_text"></h4>
+    <div id="container"></div>
+  </div>
+  <div class="foot text-center">
+    <ul class="service-icon">
+    <li><h4 style="font-size:16px;">Clean Car</h4>
+      <img src="{% static "img/form/imgKeyFeature-01.gif" %}" width="100" height="84" alt="Clean Car" style="display: inline-block;">
+    </li>
+    <li><h4 style="font-size:16px;">On Time Service</h4>
+      <img src="{% static "img/form/imgKeyFeature-02.gif" %}" width="100" height="84" alt="On-time Service" style="display: inline-block;">
+    </li>
+    <li><h4 style="font-size:16px;">Courteous Driver</h4>
+      <img class="lazy" src="{% static "img/form/imgKeyFeature-03.gif" %}" width="100" height="84" alt="Courteous Driver" style="display: inline-block;"></li>
+    <li><h4 style="font-size:16px;">Complimentary</h4>
+      <img src="{% static "img/form/imgKeyFeature-04.gif" %}" width="100" height="84" alt="Complimentary" style="display: inline-block;">
+    </li>
+    <li><h4 style="font-size:16px;">Transparent Billing</h4>
+      <img src="{% static "img/form/imgKeyFeature-05.gif" %}" width="100" height="84" alt="Transparent Billing" style="display: inline-block;">
+    </li>
+    </ul>
+  </div>
+</div>
+{% else %}
 <div class="wraper-body">
     <img class='slider' id='img_slider'/>
-    <form>
+    <form id="login_form" method="post" action="{% url "user-login" %}">
+      {% csrf_token %}
       <h1>Employer Login</h1>
       <div class="inset">
+          {% for lf in login_form %}
           <p>
-            <label for="email">EMPLOYER ID</label>
+            <label class="label" for="email">{{ lf.label }}</label> <label for="{{lf.id_for_label}}" class="error">{{ lf.errors }}</label>
             <div class='icon'>
-               <span class='icon_i login'><i class='fa fa-envelope-o fa fw'></i></span>
-             <input type="text" name="email" placeholder="Enter your hcl id">
-             
+               <span class='icon_i login'><i class='fa {{ lf.field.widget.attrs.icon}} fa fw'></i></span>
+             {{ lf }}
             </div>
           </p>
-          <p>
-            <label for="password">PASSWORD</label>
-            <div class='icon'>
-              <span class='icon_i login'><i class='fa fa-key fa fw'></i></span>
-             <input type="password" name="password" placeholder="Enter your password">
-            </div>
-          </p>
+          {% endfor %}
           <p>
             <input type="checkbox" name="remember" id="remember">
             <label for="remember">Remember me</label>
@@ -28,11 +89,14 @@
       </div>
       <p class="p-container">
           <span style="display:none;">Forgot password ?</span>
+          <span id="form_errors" class="error"></span>
           <input type="submit" name="go" id="go" value="Log in">
       </p>
   </form>
 </div>
+{% endif %}
 {% endblock %}
 {% block js %}
+<script type="text/javascript" src="{% static "js/libs/jquery.validate.js" %}"></script>
 <script type="text/javascript" src="{% static "js/home.js" %}"></script>
 {% endblock %}

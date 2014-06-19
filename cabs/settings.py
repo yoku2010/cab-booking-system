@@ -112,5 +112,5 @@ EMAIL_HOST_USER = 'info@doamin.com'
 EMAIL_HOST_PASSWORD = 'password'
 
 # login/logout urls
-LOGIN_URL="/login/"
+LOGIN_URL="/"
 LOGOUT_URL="/user-logout/"
