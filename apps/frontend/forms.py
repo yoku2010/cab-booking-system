@@ -4,10 +4,10 @@ from django.contrib.auth import authenticate, login, logout
 from apps.frontend.lookups import get_group_choices, get_user_choices
 from apps.employee.models import EmployeeManager
 
-my_default_errors = {
-    'required': '*',
-}
 
+from models import FeedbackModel
+
+feedback_subjects = (('', '- Select Subject -'),('Query', 'Query'), ('Suggestion', 'Suggestion'), ('Complaint', 'Complaint'), ('Feedback', 'Feedback'))
 class LoginForm(forms.Form):
     email = forms.CharField(label='Employee ID', widget=forms.TextInput(attrs={'placeholder': 'Enter your employee id', 'icon': 'fa-envelope-o'}))
     password = forms.CharField(label='Password', widget=forms.PasswordInput(attrs={'placeholder': 'Enter your password', 'icon': 'fa-key'}))
@@ -20,6 +20,15 @@ class LoginForm(forms.Form):
             login(request, user)                    # login user
         return user
 
+class FeedbackForm(forms.Form):
+    subject = forms.ChoiceField(label='Subject', widget=forms.Select(), choices = feedback_subjects)
+    body = forms.CharField(label='Body', widget=forms.Textarea(attrs={'placeholder': 'Enter your text'}))
+
+    def save(self, request = None):
+        data = self.cleaned_data
+        fd = FeedbackModel(user = request.user, subject = data['subject'], body = data['body'], email = request.user.email)
+        fd.save()
+        return True
 
 class UserForm(forms.Form):
     user_id = forms.CharField(widget=forms.HiddenInput(), required = False)

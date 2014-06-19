@@ -13,6 +13,9 @@
     <li>
       <a class="btn_col" href="#" id="view_cab">View Booked Cabs</a>
     </li>
+    <li>
+      <a class="btn_col" href="#" id="feedback">Feedback</a>
+    </li>
    </ul>
    {% elif "employee_manager" == group %}
    <ul class="user-link">
@@ -25,11 +28,17 @@
     <li>
       <a class="btn_col" href="#" id="approve_cab">Approve Cabs</a>
     </li>
+    <li>
+      <a class="btn_col" href="#" id="feedback">Feedback</a>
+    </li>
    </ul>
    {% elif "manager" == group %}
    <ul class="user-link">
     <li>
       <a class="btn_col" href="#" id="approve_cab2">Approve Cabs</a>
+    </li>
+    <li>
+      <a class="btn_col" href="#" id="feedback">Feedback</a>
     </li>
    </ul>
    {% elif "admin" == group %}
@@ -39,6 +48,9 @@
     </li>
     <li>
       <a class="btn_col" id="add_user" href="#">Add User</a>
+    </li>
+    <li>
+      <a class="btn_col" href="#" id="view_feedback">View Feedback</a>
     </li>
    </ul>
    {% endif %}

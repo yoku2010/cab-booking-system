@@ -5,7 +5,7 @@ from django.middleware.csrf import get_token
 
 # import libraries
 from libs.jsonresponse import JSONResponseMixin
-from apps.frontend.utils import CommonLoginForm, CommonLogout, ManageUser
+from apps.frontend.utils import CommonLoginForm, CommonLogout, ManageUser, Feedback
 
 # Create your views here.
 # Template View
@@ -179,4 +179,37 @@ class DeleteUserView(View, JSONResponseMixin, ManageUser):
     def get(self, request, *args, **kwargs):
         user_id = self.request.GET.get('user_id')
         data = self.delete_user(user_id)
+        return self.render_to_response(data)
+
+class FeedbackFormView(View, JSONResponseMixin, Feedback):
+    '''
+    @summary: Feedback Form
+    '''
+    template_name = 'frontend/feedback_form.html'
+    def get(self, request, *args, **kwargs):
+        data = {}
+        form_dt = self.feedback_form()
+        context = {'form' : form_dt, 'csrf_token_value': get_token(self.request)}
+        data['html'] = render_to_string(self.template_name, context)
+        return self.render_to_response(data)
+
+    def post(self, request, *args, **kwargs):
+        data = {}
+        dt = self.save_form(self.request)
+        if dt:
+            data['status'] = 1
+            data['message'] = 'Feedback Submitted Successfully.'
+        else:
+            data['status'] = 0
+            data['message'] = 'Data is missing'
+        return self.render_to_response(data)
+
+class FeedbackListView(View, JSONResponseMixin, Feedback):
+    '''
+    @summary: Feedback List
+    '''
+    template_name = 'frontend/feedback_list.html'
+    def get(self, request, *args, **kwargs):
+        context = { 'feedback': self.get_feedback_list() }
+        data = {'status': 1, 'html': render_to_string(self.template_name, context) }
         return self.render_to_response(data)

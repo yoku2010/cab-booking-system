@@ -817,6 +817,10 @@ top: 15px;
   width: 264px;
   padding:5px;
 }
+.form-div textarea {
+  width: 250px;
+  padding: 5px;
+}
 #form_error {
   font-weight: bold;
   font-size: 13px;

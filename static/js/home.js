@@ -20,6 +20,47 @@ $(function() {
     setTimeout(function() { setSrc(); }, 2000);
   }
 
+  function feedbackBind() {
+    $('#feedback_form').validate({
+      rules: {
+        subject: {
+          required: true
+        },
+        body: {
+          required: true
+        }
+      },
+      messages: {
+        subject: {
+          required: '*'
+        },
+        body: {
+          required: '*'
+        }
+      },
+      submitHandler: function (form) {
+        $.ajax({
+          url: form.action,
+          type: form.method,
+          data: $(form).serialize(),
+          cache: false,
+          success: function(response) {
+            if (0 == response.status) {
+              $('#form_error').text(response.message).show();
+            }
+            else {
+              $('#id_subject').val('');
+              $('#id_body').val('');
+              alert(response.message);
+            }
+          },
+          error: function(jqXHR, textStatus, errorThrown) {
+            console.log('ERRORS: ' + textStatus);
+          }
+        });
+      }
+    });
+  }
   function editUserBind() {
     var $cancleBtn = $('#edit_user_cancel').click(function(e) {
       e.preventDefault();
@@ -668,6 +709,39 @@ $(function() {
         else {
           $("<label/>").addClass('error').text(response.message).appendTo($container.empty());
         }
+      }
+    });
+  });
+  $('#feedback').click(function(e){
+    e.preventDefault();
+    $headerText.text("Feedback");
+    $container.empty();
+    $.ajax({
+      url: '/feedback/',
+      type: 'get',
+      cache: false,
+      success: function(response) {
+        $container.html(response.html);
+        feedbackBind();
+      },
+      error: function(jqXHR, textStatus, errorThrown) {
+        console.log('ERRORS: ' + textStatus);
+      }
+    });
+  });
+  $('#view_feedback').click(function(e) {
+    e.preventDefault();
+    $headerText.text("Feedbacks");
+    $container.empty();
+    $.ajax({
+      url: '/feedback-list/',
+      type: 'get',
+      cache: false,
+      success: function(response) {
+        $container.html(response.html);
+      },
+      error: function(jqXHR, textStatus, errorThrown) {
+        console.log('ERRORS: ' + textStatus);
       }
     });
   });

@@ -4,8 +4,9 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 
 # import apps
-from apps.frontend.forms import LoginForm, UserForm
+from apps.frontend.forms import LoginForm, UserForm, FeedbackForm
 from apps.employee.models import EmployeeManager
+from models import FeedbackModel
 
 # utility classes
 class UserProfilePage(object):
@@ -154,3 +155,18 @@ class ManageUser(object):
             data['status'] = 0
             data['message'] = 'User does not exist. Please try again'
         return data
+
+class Feedback():
+    def feedback_form(self):
+        form = FeedbackForm()
+        return form
+
+    def save_form(self, request):
+        form = FeedbackForm(request.POST)
+        if form.is_valid():
+            return form.save(request)
+        else:
+            return False
+
+    def get_feedback_list(self):
+        return FeedbackModel.objects.all()

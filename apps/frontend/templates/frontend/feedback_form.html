@@ -1,0 +1,21 @@
+<div class="form-div">
+    <form method="post" action="{% url 'feedback' %}" id="feedback_form">
+        <div style='display:none'><input type='hidden' name='csrfmiddlewaretoken' value='{{ csrf_token_value }}'/></div>
+        <label id="form_error" class="error"></label>
+        {# Include the hidden fields #}
+        {% for hidden in form.hidden_fields %}
+            {{ hidden }}
+        {% endfor %}
+        {# Include the visiable fields #}
+        {% for f in form.visible_fields %}
+        <p>
+            <label class="label">{{ f.label }}: </label>
+            {{ f }}
+            <label class="error" id="{{ f.id_for_label }}">{% if f.errors.as_text %}*{% endif %}</label>
+        </p>
+        {% endfor %}
+        <p class="form-btn">
+            <input type="submit" value="Submit"/>
+        </p>
+    </form>
+</div>

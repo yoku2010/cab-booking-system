@@ -1,0 +1,24 @@
+<table class="user-table">
+    <tbody>
+        <tr>
+            <th>S.No.</th>
+            <th>User Name</th>
+            <th>Subject</th>
+            <th>Body</th>
+        </tr>
+        {% if feedback %}
+        {% for f in feedback %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ f.user.first_name }} {{ f.user.last_name }}</td>
+            <td>{{ f.subject }}</td>
+            <td>{{ f.body }}</td>
+        </tr>
+        {% endfor %}
+        {% else %}
+        <tr>
+            <td colspan="4"> No Feedback Exist </td>
+        </tr>
+        {% endif %}
+    </tbody>
+</table>
