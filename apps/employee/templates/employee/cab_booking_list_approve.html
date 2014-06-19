@@ -1,0 +1,141 @@
+<div class="book-cab">
+    <div class="row be-tabs">
+        <div class="large-12 medium-12 small-12 columns">
+            <div class="row">
+                <h5 class="large-4 small-4 columns active">
+                    <a class="booking-link local" title="" href="#local">Local</a>
+                </h5>
+                <h5 class="large-4 small-4 columns ">
+                    <a class="booking-link airport" title="" href="#airport">Airport Transfer</a>
+                </h5>
+                <h5 class="large-4 small-4 columns ">
+                    <a class="booking-link outstation" title="" href="#out_station">Outstation</a>
+                </h5>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row be-tabs-contents be-ex" id="local" style="display:none;">
+        <div class="form-div">
+            <table class="user-table">
+                <tbody>
+                    <tr>
+                        <th>S.No.</th>
+                        <th>Employee</th>
+                        <th>City Name</th>
+                        <th>Duration</th>
+                        <th>On</th>
+                        <th>At</th>
+                        <th>Reason</th>
+                        <th>Approve</th>
+                    </tr>
+                    {% if local %}
+                    {% for l in local %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ l.user.first_name }} {{ l.user.last_name }}</td>
+                        <td>{{ l.start}}</td>
+                        <td>{{ l.duration }}</td>
+                        <td>{{ l.date }}</td>
+                        <td>{{ l.time }}</td>
+                        <td>{{ l.reason }}</td>
+                        <td>
+                        {% if l.status == 0 or l.status == 1 %}
+                        <a class="approve-booking" data-booking-d="{{ l.id }}" href="#"><span class="icon_i"><i class="fa fa-square-o fa fw"></i></span></a>
+                        {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    {% else %}
+                    <tr>
+                        <td colspan="8"> No Booking Exist </td>
+                    </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="row be-tabs-contents be-ex" id="airport" style="display:none;">
+        <div class="form-div">
+            <table class="user-table">
+                <tbody>
+                    <tr>
+                        <th>S.No.</th>
+                        <th>Employee</th>
+                        <th>want a car for</th>
+                        <th>City</th>
+                        <th>On</th>
+                        <th>At</th>
+                        <th>Reason</th>
+                        <th>Approve</th>
+                    </tr>
+                    {% if airport %}
+                    {% for l in airport %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ l.user.first_name }} {{ l.user.last_name }}</td>
+                        <td>{{ l.start}}</td>
+                        <td>{{ l.end }}</td>
+                        <td>{{ l.date }}</td>
+                        <td>{{ l.time }}</td>
+                        <td>{{ l.reason }}</td>
+                        <td>
+                            {% if l.status == 0 or l.status == 1 %}
+                            <a class="approve-booking" data-booking-d="{{ l.id }}" href="#"><span class="icon_i"><i class="fa fa-square-o fa fw"></i></span></a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    {% else %}
+                    <tr>
+                        <td colspan="8"> No Booking Exist </td>
+                    </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="row be-tabs-contents be-ex" id="out_station" style="display:none;">
+        <div class="form-div">
+            <table class="user-table">
+                <tbody>
+                    <tr>
+                        <th>S.No.</th>
+                        <th>Employee</th>
+                        <th>From</th>
+                        <th>To</th>
+                        <th>On</th>
+                        <th>At</th>
+                        <th>Reason</th>
+                        <th>Approve</th>
+                    </tr>
+                    {% if out_station %}
+                    {% for l in out_station %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ l.user.first_name }} {{ l.user.last_name }}</td>
+                        <td>{{ l.start}}</td>
+                        <td>{{ l.end }}</td>
+                        <td>{{ l.date }}</td>
+                        <td>{{ l.time }}</td>
+                        <td>{{ l.reason }}</td>
+                        <td>
+                        {% if l.status == 0 or l.status == 1 %}
+                        <a class="approve-booking" data-booking-d="{{ l.id }}" href="#"><span class="icon_i"><i class="fa fa-square-o fa fw"></i></span></a>
+                        {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    {% else %}
+                    <tr>
+                        <td colspan="8"> No Booking Exist </td>
+                    </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

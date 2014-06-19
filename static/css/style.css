@@ -906,7 +906,10 @@ min-height: 273px;
   width: auto;
   padding: 10px;
 }
-.book-cab .form-div input[type=text] {
+.book-cab .form-div label {
+  display: inline-block;
+}
+.book-cab .form-div input[type=text], .book-cab .form-div textarea {
   width: 1113px;
   display: block;
 }

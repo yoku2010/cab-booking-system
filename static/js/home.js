@@ -7,7 +7,7 @@ $(function() {
     '5.jpg',
     '6.jpg'
   ], i = 0, $img = $('#img_slider'), imgPath = 'static/img/', $errorHandler = $('#form_errors'), $headerText = $('#header_text'),
-  $firstLink = $('ul.user-link > li > a').eq(0), $container = $('#container');
+  $mainLink = $('ul.user-link > li > a'), $firstLink = $mainLink.eq(0), $container = $('#container');
 
   function setSrc() {
     $img.attr('src', imgPath + imgList[i]);
@@ -105,6 +105,9 @@ $(function() {
           required: true,
           email: true
         },
+        employee_id: {
+          required: true
+        },
         password: {
           required: true
         },
@@ -125,6 +128,9 @@ $(function() {
         email: {
           required: '*',
           email: '*'
+        },
+        employee_id: {
+          required: true
         },
         password: {
           required: '*'
@@ -159,7 +165,102 @@ $(function() {
     });
   }
 
-
+  function viewCabBind() {
+    var $bookingLink = $('.booking-link'), $bookingDiv = $('.be-ex');
+    if ($bookingLink.length > 0) {
+      $bookingLink.click(function(e) {
+        e.preventDefault();
+        var $this = $(this);
+        $bookingLink.parent().removeClass('active');
+        $this.parent().addClass('active');
+        $bookingDiv.hide();
+        $($this.attr('href')).show();
+      });
+      $bookingLink.eq(0).click();
+    }
+    $('.delete-booking').click(function(e) {
+      e.preventDefault();
+      var $this = $(this), bookingId = $this.data('booking-d');
+      if (confirm('Are you sure, you want to cancel this cab?')){
+        $.ajax({
+          url: '/employee/delete-booking-cab/',
+          type: 'get',
+          data: {booking_id: bookingId},
+          cache: false,
+          success: function(response) {
+            alert(response.message);
+            if (response.status == 1) {
+              $mainLink.eq(1).click();
+            }
+          }
+        });
+      }
+    });
+  }
+  function approveCabBind() {
+    var $bookingLink = $('.booking-link'), $bookingDiv = $('.be-ex');
+    if ($bookingLink.length > 0) {
+      $bookingLink.click(function(e) {
+        e.preventDefault();
+        var $this = $(this);
+        $bookingLink.parent().removeClass('active');
+        $this.parent().addClass('active');
+        $bookingDiv.hide();
+        $($this.attr('href')).show();
+      });
+      $bookingLink.eq(0).click();
+    }
+    $('.approve-booking').click(function(e) {
+      e.preventDefault();
+      var $this = $(this), bookingId = $this.data('booking-d');
+      if (confirm('Are you sure, you want to approve this cab?')){
+        $.ajax({
+          url: '/employee/approve-booking-cab/',
+          type: 'get',
+          data: {booking_id: bookingId},
+          cache: false,
+          success: function(response) {
+            alert(response.message);
+            if (response.status == 1) {
+              $mainLink.eq(2).click();
+            }
+          }
+        });
+      }
+    });
+  }
+  function approveCab2Bind() {
+    var $bookingLink = $('.booking-link'), $bookingDiv = $('.be-ex');
+    if ($bookingLink.length > 0) {
+      $bookingLink.click(function(e) {
+        e.preventDefault();
+        var $this = $(this);
+        $bookingLink.parent().removeClass('active');
+        $this.parent().addClass('active');
+        $bookingDiv.hide();
+        $($this.attr('href')).show();
+      });
+      $bookingLink.eq(0).click();
+    }
+    $('.approve-booking').click(function(e) {
+      e.preventDefault();
+      var $this = $(this), bookingId = $this.data('booking-d');
+      if (confirm('Are you sure, you want to approve this cab?')){
+        $.ajax({
+          url: '/employee/approve-booking-cab-2/',
+          type: 'get',
+          data: {booking_id: bookingId},
+          cache: false,
+          success: function(response) {
+            alert(response.message);
+            if (response.status == 1) {
+              $mainLink.eq(0).click();
+            }
+          }
+        });
+      }
+    });
+  }
   function bookCabBind() {
     var $bookingLink = $('.booking-link'), $bookingDiv = $('.be-ex');
     if ($bookingLink.length > 0) {
@@ -173,6 +274,182 @@ $(function() {
       });
       $bookingLink.eq(0).click();
     }
+
+    $('.cancel-booking').click(function(e) {
+      e.preventDefault();
+      $mainLink.eq(1).click();
+    });
+    $('#local_form').validate({
+      rules: {
+        from_city: {
+          required: true
+        },
+        duration: {
+            required: true
+        },
+        pickup_date: {
+          required: true
+        },
+        pickup_time: {
+          required: true
+        },
+        reason: {
+          required: true
+        }
+      },
+      messages: {
+        from_city: {
+          required: '*'
+        },
+        duration: {
+            required: '*'
+        },
+        pickup_date: {
+          required: '*'
+        },
+        pickup_time: {
+          required: '*'
+        },
+        reason: {
+          required: '*'
+        }
+      },
+      submitHandler: function (form) {
+        $.ajax({
+          url: form.action,
+          type: form.method,
+          data: $(form).serialize(),
+          cache: false,
+          success: function(response) {
+            if (1 === response.status) {    // success
+              alert(response.message);
+              $mainLink.eq(1).click();
+            }
+            else {      // error
+              alert(response.message);
+            }
+          },
+          error: function(jqXHR, textStatus, errorThrown) {
+            console.log('ERRORS: ' + textStatus);
+          }
+        });
+      }
+    });
+
+    $('#airport_form').validate({
+      rules: {
+        want_car_for: {
+          required: true
+        },
+        city: {
+            required: true
+        },
+        pickup_date: {
+          required: true
+        },
+        pickup_time: {
+          required: true
+        },
+        reason: {
+          required: true
+        }
+      },
+      messages: {
+        want_car_for: {
+          required: '*'
+        },
+        city: {
+            required: '*'
+        },
+        pickup_date: {
+          required: '*'
+        },
+        pickup_time: {
+          required: '*'
+        },
+        reason: {
+          required: '*'
+        }
+      },
+      submitHandler: function (form) {
+        $.ajax({
+          url: form.action,
+          type: form.method,
+          data: $(form).serialize(),
+          cache: false,
+          success: function(response) {
+            if (1 === response.status) {    // success
+              alert(response.message);
+              $mainLink.eq(1).click();
+            }
+            else {      // error
+              alert(response.message);
+            }
+          },
+          error: function(jqXHR, textStatus, errorThrown) {
+            console.log('ERRORS: ' + textStatus);
+          }
+        });
+      }
+    });
+
+    $('#outstation_form').validate({
+      rules: {
+        from_city: {
+          required: true
+        },
+        to_city: {
+            required: true
+        },
+        pickup_date: {
+          required: true
+        },
+        pickup_time: {
+          required: true
+        },
+        reason: {
+          required: true
+        }
+      },
+      messages: {
+        from_city: {
+          required: '*'
+        },
+        to_city: {
+            required: '*'
+        },
+        pickup_date: {
+          required: '*'
+        },
+        pickup_time: {
+          required: '*'
+        },
+        reason: {
+          required: '*'
+        }
+      },
+      submitHandler: function (form) {
+        $.ajax({
+          url: form.action,
+          type: form.method,
+          data: $(form).serialize(),
+          cache: false,
+          success: function(response) {
+            if (1 === response.status) {    // success
+              alert(response.message);
+              $mainLink.eq(1).click();
+            }
+            else {      // error
+              alert(response.message);
+            }
+          },
+          error: function(jqXHR, textStatus, errorThrown) {
+            console.log('ERRORS: ' + textStatus);
+          }
+        });
+      }
+    });
+
   }
 
   if ($img.length > 0) {
@@ -339,17 +616,60 @@ $(function() {
         }
       }
     });
-    
   });
   $('#view_cab').click(function(e) {
     e.preventDefault()
     $headerText.text('View Cabs');
-    $container.html('You can view your cab');
+    $.ajax({
+      url: '/employee/booked-cab-list/',
+      type: 'get',
+      cache: false,
+      success: function(response) {
+        if (response.status = 1) {
+          $container.html(response.html);
+          viewCabBind();
+        }
+        else {
+          $("<label/>").addClass('error').text(response.message).appendTo($container.empty());
+        }
+      }
+    });
   });
   $('#approve_cab').click(function(e) {
     e.preventDefault()
     $headerText.text('Approve Cabs');
-    $container.html('You can approve your employees cab');
+    $.ajax({
+      url: '/employee/approve-cab-list/',
+      type: 'get',
+      cache: false,
+      success: function(response) {
+        if (response.status = 1) {
+          $container.html(response.html);
+          approveCabBind();
+        }
+        else {
+          $("<label/>").addClass('error').text(response.message).appendTo($container.empty());
+        }
+      }
+    });
+  });
+  $('#approve_cab2').click(function(e) {
+    e.preventDefault();
+    $headerText.text('Approve Cabs');
+    $.ajax({
+      url: '/employee/approve-cab-list-2/',
+      type: 'get',
+      cache: false,
+      success: function(response) {
+        if (response.status = 1) {
+          $container.html(response.html);
+          approveCab2Bind();
+        }
+        else {
+          $("<label/>").addClass('error').text(response.message).appendTo($container.empty());
+        }
+      }
+    });
   });
   if ($firstLink.length > 0) {
     $firstLink.click();
